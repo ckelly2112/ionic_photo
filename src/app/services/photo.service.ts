@@ -4,12 +4,18 @@ import { Plugins, CameraResultType, Capacitor, FilesystemDirectory,
 
 const { Camera, Filesystem, Storage } = Plugins;
 
+interface Photo {
+  filepath: string;
+  webviewPath: string;
+  base64?: string;
+}
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class PhotoService {
+  public photos: Photo[] = [];
 
   constructor() { }
   
@@ -20,6 +26,10 @@ export class PhotoService {
       resultType: CameraResultType.Uri, 
       source: CameraSource.Camera, 
       quality: 100 
+    });
+    this.photos.unshift({
+      filepath: "soon...",
+      webviewPath: capturedPhoto.webPath
     });
   }
 }
